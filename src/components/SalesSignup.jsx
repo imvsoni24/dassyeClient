@@ -11,12 +11,20 @@ const SalesSignup = () => {
   const [otp, setOtp] = useState('');
   const [password, setPassword] = useState('');
   const [isOtpVerified, setIsOtpVerified] = useState(false);
+  const [Toggle,setToggle] = useState(true)
+  const [loading,setLoading] = useState(false)
+  const [otpLoading,setOtpLoading] = useState(false)
+  const [verifyLoading,setVerifyLoading] = useState(false)
+
+
 
   const handleSendOtp = async(e) => {
     e.preventDefault()
+    setOtpLoading(true)
     let response = await axios.post(`https://odd-boa-shoe.cyclic.cloud/sendSalesOTP`,{email})
     response = await response.data.message
     alert(response)
+    setOtpLoading(false)
     if(response ==="OTP sent successfully"){
         alert("Please verify otp")
     }
@@ -24,9 +32,11 @@ const SalesSignup = () => {
 
   const handleVerifyOtp = async(e) => {
     e.preventDefault()
+    setVerifyLoading(true)
     let response = await axios.post(`https://odd-boa-shoe.cyclic.cloud/verifySalesOTP`,{otp})
     response = await response.data.message
     alert(response)
+    setVerifyLoading(false)
     if(response==="OTP verified"){
         setIsOtpVerified(true)
         alert("Please signup")
@@ -39,9 +49,11 @@ const SalesSignup = () => {
         alert("Please fill all the field")
         return
     }
+    setLoading(true)
     let response = await axios.post(`https://odd-boa-shoe.cyclic.cloud/salesSignup`,{fullName,position,companyName,mobileNumber,email,password})
     response = await response.data.message
     alert(response)
+    setLoading(false)
     if(response ==="Registered successfully"){
         alert("Please login")
         setFullName("")
@@ -55,83 +67,92 @@ const SalesSignup = () => {
     }
   };
 
+  const toggle = ()=>{
+    setToggle(false)
+  }
+
+  let url = `https://img.freepik.com/free-vector/happy-salesman-character-with-flat-design_23-2147875426.jpg`
   return (<>
-    <div className='container'>
-    <div><h1>Sales Profile</h1></div>
-    <div><img src='https://img.freepik.com/free-vector/happy-salesman-character-with-flat-design_23-2147875426.jpg' alt='sales person'/></div>
+
+  {Toggle? <div className='container'>
+    <div><h1 className='profile'>Sales Profile</h1></div>
+    <div><img src={url} alt='sales person'/></div>
     <div>
       <form>
         <div>
-          <label>Full Name:</label>
           <input
             type="text"
             required
             value={fullName}
+            placeholder='Enter Your Full Name'
             onChange={(e) => setFullName(e.target.value)}
           />
         </div>
         <div>
-          <label>Position:</label>
           <input
             type="text"
             required
             value={position}
+            placeholder='Enter Your Position'
             onChange={(e) => setPosition(e.target.value)}
           />
         </div>
         <div>
-          <label>Company Name:</label>
           <input
             type="text"
             value={companyName}
+            placeholder='Enter Your Company Name'
             onChange={(e) => setCompanyName(e.target.value)}
           />
         </div>
         <div>
-          <label>Mobile Number:</label>
           <input
             type="tel"
             required
             value={mobileNumber}
+            placeholder='Enter Your Mobile Number'
             onChange={(e) => setMobileNumber(e.target.value)}
           />    
         </div>
         <div>
-          <label>Email Id:</label>
           <input
             type="email"
             required
             value={email}
+            placeholder='Enter Your Email Id'
             onChange={(e) => setEmail(e.target.value)}
           />
-          <button disabled={email.length===0} onClick={handleSendOtp}>Send OTP</button>
+          <button disabled={email.length===0} onClick={handleSendOtp}>{otpLoading?"Loading...":"Send OTP"}</button>
         </div>
         <div>
-          <label>OTP:</label>
           <input
             type="text"
             required
             value={otp}
+            placeholder='Enter OTP'
             onChange={(e) => setOtp(e.target.value)}
           />
-          <button disabled={otp.length===0} onClick={handleVerifyOtp}>Verify OTP</button>
+          <button disabled={otp.length===0} onClick={handleVerifyOtp}>{verifyLoading?"Loading...":"Verify OTP"}</button>
         </div>
           <div>
-            <label>Password:</label>
             <input
               type="password"
               required
               value={password}
+              placeholder='Create Your Password'
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-        <button onClick={handleSignup} disabled={!isOtpVerified}>
-          Sign Up
+        <button className='submit' onClick={handleSignup} disabled={!isOtpVerified}>
+        {loading?"Loading...":"Sign up"}
         </button>
+        <div className='or'>Or</div>
+        <button onClick={toggle} className='submit'>Log in</button>
       </form>
     </div>
-    </div>
-    <Login route="salesLogin" />
+    </div>  :     <Login route="salesLogin" profile={"Sales"} url={url} />
+}
+    
   </>);
 };
 

@@ -1,10 +1,10 @@
-body{
-    margin: 0;
-    padding: 0;
-}
 
 .navbar {
-    background-color: #333;
+    background: rgba(42, 43, 56, 0.5);
+    border: 0.2rem solid rgb(42, 43, 55);
+    backdrop-filter: blur(104px);
+    border-radius: 2rem;
+    margin-top: 10px;
     color: white;
     padding: 15px 0;
   }
@@ -22,5 +22,11 @@ body{
   }
   
   .navbar-link:hover {
-    text-decoration: underline;
+    color: teal;
+  }
+
+  @media (max-width: 370px) {
+    .navbar-link{
+      font-size: 14px;
+    }
   }

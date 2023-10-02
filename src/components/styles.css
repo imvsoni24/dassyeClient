@@ -1,5 +1,6 @@
 body{
-    background-color: #333;
+    background-color: #10101a;
+    font-family: Arial, sans-serif;
 }
 .container {
     display: flex;
@@ -8,60 +9,74 @@ body{
     justify-content: center;
     text-align: center;
     margin: 10px auto;
-    max-width: 400px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    background-color: #fff;
+    max-width: 500px;
+    padding: 17px 20px;
+    background: rgba(42, 43, 56, 0.5);
+    border: 0.2rem solid rgb(42, 43, 55);
+    backdrop-filter: blur(104px);
+    border-radius: 2rem;
+  }
+  div .profile{
+    color: rgba(255, 255, 255, 0.681);
   }
   
   .container img {
-    width: 150px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
-    margin-bottom: 20px;
-  }
-  
-  form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  form div {
     margin-bottom: 10px;
   }
+
   
-  label {
-    font-weight: bold;
+  form div {
+    margin-bottom: 20px;
   }
+
   
   input[type="text"],
   input[type="email"],
   input[type="password"],
   input[type="tel"] {
-    width: 100%;
-    padding: 10px;
+    width: 80%;
+    padding: 13px 35px;
     margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border: 0.2rem solid rgb(42, 43, 55);
+    border-radius: 15px;
     outline: none;
+    background: rgba(42, 43, 56, 0.5);
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.737);
   }
 
   div button{
     margin-top: 5px;
+    border: 0.1rem solid rgb(42, 43, 55);
+    background: rgba(42, 43, 56, 0.5);
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.737);
+    padding: 10px 20px;
+    border-radius: 15px;
+    cursor: pointer;
   }
   
-  button {
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 10px;
-    border: none;
-    border-radius: 5px;
+  .submit {
+    border: 0.2rem solid rgb(42, 43, 55);
+    background: rgba(42, 43, 56, 0.5);
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.737);
+    padding: 10px 70px;
+    border-radius: 15px;
     cursor: pointer;
-    
+  }
+
+  .or{
+    font-size: 20px;
+    margin-top: 10px;
+    color: rgba(255, 255, 255, 0.737);
   }
   
   button:disabled {
-    background-color: #ccc;
+    background-color: #d3d3d3;
     cursor: not-allowed;
   }
 
