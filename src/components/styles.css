@@ -1,6 +1,7 @@
 body{
     background-color: #10101a;
     font-family: Arial, sans-serif;
+    color: rgba(255, 255, 255, 0.681);
 }
 .container {
     display: flex;
@@ -16,7 +17,7 @@ body{
     backdrop-filter: blur(104px);
     border-radius: 2rem;
   }
-  div .profile{
+  div .profile .navigate{
     color: rgba(255, 255, 255, 0.681);
   }
   
@@ -34,6 +35,7 @@ body{
 
   
   input[type="text"],
+  input[type="date"],
   input[type="email"],
   input[type="password"],
   input[type="tel"] {
@@ -46,6 +48,7 @@ body{
     background: rgba(42, 43, 56, 0.5);
     font-size: 20px;
     color: rgba(255, 255, 255, 0.737);
+    margin-bottom: 10px;
   }
 
   div button{
@@ -90,6 +93,7 @@ body{
     }
   
     input[type="text"],
+    input[type="date"],
     input[type="email"],
     input[type="password"],
     input[type="tel"] {
@@ -107,6 +111,7 @@ body{
     }
   
     input[type="text"],
+    input[type="date"],
     input[type="email"],
     input[type="password"],
     input[type="tel"] {
@@ -115,3 +120,6 @@ body{
       padding: 10px;
     }
   }
+
+
+  

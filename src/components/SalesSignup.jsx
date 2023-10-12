@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from "axios"
 import Login from './Login';
+import { Link } from 'react-router-dom';
+import {IoNavigateOutline} from "react-icons/io5"
 
 const SalesSignup = () => {
   const [fullName, setFullName] = useState('');
@@ -21,7 +23,7 @@ const SalesSignup = () => {
   const handleSendOtp = async(e) => {
     e.preventDefault()
     setOtpLoading(true)
-    let response = await axios.post(`https://odd-boa-shoe.cyclic.cloud/sendSalesOTP`,{email})
+    let response = await axios.post(`http://localhost:4500/sendSalesOTP`,{email})
     response = await response.data.message
     alert(response)
     setOtpLoading(false)
@@ -33,7 +35,7 @@ const SalesSignup = () => {
   const handleVerifyOtp = async(e) => {
     e.preventDefault()
     setVerifyLoading(true)
-    let response = await axios.post(`https://odd-boa-shoe.cyclic.cloud/verifySalesOTP`,{otp})
+    let response = await axios.post(`http://localhost:4500/verifySalesOTP`,{otp})
     response = await response.data.message
     alert(response)
     setVerifyLoading(false)
@@ -50,7 +52,7 @@ const SalesSignup = () => {
         return
     }
     setLoading(true)
-    let response = await axios.post(`https://odd-boa-shoe.cyclic.cloud/salesSignup`,{fullName,position,companyName,mobileNumber,email,password})
+    let response = await axios.post(`http://localhost:4500/salesSignup`,{fullName,position,companyName,mobileNumber,email,password})
     response = await response.data.message
     alert(response)
     setLoading(false)
@@ -75,7 +77,7 @@ const SalesSignup = () => {
   return (<>
 
   {Toggle? <div className='container'>
-    <div><h1 className='profile'>Sales Profile</h1></div>
+    <div><h1 className='profile'><Link className='navigate' to="/salesprofile">Sales Profile<IoNavigateOutline/></Link></h1></div>
     <div><img src={url} alt='sales person'/></div>
     <div>
       <form>

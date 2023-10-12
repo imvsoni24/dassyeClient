@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import axios from "axios"
 import Login from './Login';
+import { Link } from 'react-router-dom';
+import {IoNavigateOutline} from "react-icons/io5"
 
 const BusinessSignup = () => {
   const [businessName, setBusinessName] = useState('');
+  const [distributorName,setDistributorName] = useState('')
   const [location,setLocation] = useState("")
   const [website,setWebsite] = useState("")
   const [mobileNumber, setMobileNumber] = useState('');
@@ -19,7 +22,7 @@ const BusinessSignup = () => {
   const handleSendOtp = async(e) => {
     e.preventDefault()
     setOtpLoading(true)
-    let response = await axios.post(`https://odd-boa-shoe.cyclic.cloud/sendBusinessOTP`,{email})
+    let response = await axios.post(`http://localhost:4500/sendBusinessOTP`,{email})
     response = await response.data.message
     alert(response)
     setOtpLoading(false)
@@ -33,7 +36,7 @@ const BusinessSignup = () => {
   const handleVerifyOtp = async(e) => {
     e.preventDefault()
     setVerifyLoading(true)
-    let response = await axios.post(`https://odd-boa-shoe.cyclic.cloud/verifyBusinessOTP`,{otp})
+    let response = await axios.post(`http://localhost:4500/verifyBusinessOTP`,{otp})
     response = await response.data.message
     alert(response)
     setVerifyLoading(false)
@@ -45,18 +48,19 @@ const BusinessSignup = () => {
 
   const handleSignup = async(e) => {
     e.preventDefault()
-    if(!businessName || !location || !mobileNumber || !email || !password){
+    if(!businessName || !distributorName || !location || !mobileNumber || !email || !password){
       alert("Please fill all the field")
       return
     }
     setLoading(true)
-    let response = await axios.post(`https://odd-boa-shoe.cyclic.cloud/businessSignup`,{businessName,location,website,mobileNumber,email,password})
+    let response = await axios.post(`http://localhost:4500/businessSignup`,{businessName,distributorName,location,website,mobileNumber,email,password})
     response = await response.data.message
     alert(response)
     setLoading(false)
     if(response ==="Registered successfully"){
         alert("Please login")
         setBusinessName("")
+        setDistributorName("")
         setLocation("")
         setWebsite("")
         setMobileNumber("")
@@ -76,7 +80,7 @@ const BusinessSignup = () => {
   return (<>
 
     {Toggle? <div className="container" >
-    <div><h1 className='profile'>Business Profile</h1></div>
+    <div><h1 className='profile'><Link className='navigate' to="/businessprofile">Business Profile<IoNavigateOutline/></Link></h1></div>
     <div><img src={url} alt='Business'/></div>
     <div>
       <form>
@@ -87,6 +91,15 @@ const BusinessSignup = () => {
             value={businessName}
             placeholder='Enter Your Business Name'
             onChange={(e) => setBusinessName(e.target.value)}
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            required
+            value={distributorName}
+            placeholder='Enter Your Distributor Name'
+            onChange={(e) => setDistributorName(e.target.value)}
           />
         </div>
         <div>

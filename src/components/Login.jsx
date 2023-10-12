@@ -1,12 +1,15 @@
 import axios from 'axios';
 import React, {useState } from 'react'
 import "./styles.css"
+import { useNavigate } from 'react-router-dom';
 
 
 const Login = ({route,profile,url}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading,setLoading] = useState(false)
+    const navigate = useNavigate()
+    console.log(route)
     
 
     const handleSignin = async(e) => {
@@ -16,12 +19,24 @@ const Login = ({route,profile,url}) => {
           return
         }
         setLoading(true)
-        let response = await axios.post(`https://odd-boa-shoe.cyclic.cloud/${route}`,{email,password})
-        response = await response.data.message
-        alert(response)
+        let response = await axios.post(`http://localhost:4500/${route}`,{email,password})
+        response = await response.data
+        if(response.id){
+          localStorage.setItem(`${profile} id`,response.id)
+        }
+        alert(response.message)
         setLoading(false)
         setEmail("")
         setPassword("")
+        if(response.message==="Successfully login"){
+          if(profile==="Business"){
+            navigate("/businessprofile")
+          }else if(profile==="Sales"){
+            navigate("/salesprofile")
+          }else if(profile==="Shop"){
+            navigate("/shopprofile")
+          }
+        }
       };
 
   return (

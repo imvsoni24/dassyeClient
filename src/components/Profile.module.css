@@ -1,0 +1,109 @@
+.container {
+    width: 70%;
+    margin: auto;
+    margin-top: 20px;
+  }
+  
+  .menuIcons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .menuIcons>div>img{
+    width: 50px;
+    border-radius: 25px;
+  }
+  
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  
+  .content>.buttons img{
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+  }
+
+  .content>button img{
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+  }
+  
+  
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .buttons>button{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .content>button{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+
+  .buttons>button>div{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+
+
+  .imageUploads {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .imageBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed #ccc;
+    cursor: pointer;
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+    transition: background-color 0.3s;
+    position: relative;
+  }
+  
+  .imageBox:hover::before {
+    content: "Select an Image";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: black; 
+    padding: 5px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+    z-index: 1; 
+  }
+  
+
+
+  .imageUploads>img {
+    width: 200px;
+    height: 200px;
+  }
+
+
+  input[type="file"] {
+    display: none;
+  }
